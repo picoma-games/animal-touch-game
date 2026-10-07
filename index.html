@@ -6,24 +6,74 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="どうぶつタッチ">
+  <meta name="apple-mobile-web-app-title" content="どうぶつどこ？">
   <meta name="format-detection" content="telephone=no">
-  <meta name="theme-color" content="#fff4d6">
-  <title>どうぶつタッチ</title>
+  <meta name="theme-color" content="#8fd8ff">
+  <title>どうぶつ どこ？</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="field" aria-label="どうぶつ">
-    <button class="animal animal--elephant" type="button" data-pitch="196" aria-label="ぞう">
-      <span class="animal__face" aria-hidden="true">🐘</span>
+  <!-- 背景：空・太陽・雲・きらきら・丘・草・花・ちょうちょ -->
+  <div class="scene" aria-hidden="true">
+    <div class="sun"><div class="sun__rays"></div><div class="sun__core"></div></div>
+    <div class="cloud cloud--1"></div>
+    <div class="cloud cloud--2"></div>
+    <div class="cloud cloud--3"></div>
+    <div class="cloud cloud--4"></div>
+    <div class="twinkles" id="twinkles"></div>
+    <div class="hill hill--back"></div>
+    <div class="hill hill--front"></div>
+    <div class="grass" id="grass"></div>
+    <div class="flowers" id="flowers"></div>
+    <div class="butterfly"><span>🦋</span></div>
+  </div>
+
+  <!-- スタート画面 -->
+  <section class="screen screen--start is-active" id="start">
+    <h1 class="title" aria-label="どうぶつ どこ？">
+      <span>ど</span><span>う</span><span>ぶ</span><span>つ</span><span class="title__gap"></span><span>ど</span><span>こ</span><span>？</span>
+    </h1>
+    <div class="peek" aria-hidden="true">
+      <span class="peek__a">🐶</span>
+      <span class="peek__a">🐱</span>
+      <span class="peek__a">🐘</span>
+    </div>
+    <button class="start-btn" id="startBtn" type="button" aria-label="スタート">
+      <span class="start-btn__ring"></span>
+      <svg class="start-btn__icon" viewBox="0 0 100 100" aria-hidden="true"><path d="M36 24 Q30 20 30 28 L30 72 Q30 80 36 76 L76 54 Q82 50 76 46 Z"/></svg>
+      <span class="start-btn__label">スタート</span>
     </button>
-    <button class="animal animal--dog" type="button" data-pitch="330" aria-label="いぬ">
-      <span class="animal__face" aria-hidden="true">🐶</span>
+    <span class="finger" aria-hidden="true">👆</span>
+  </section>
+
+  <!-- ゲーム画面 -->
+  <section class="screen screen--game" id="game">
+    <header class="hud">
+      <button class="ask" id="askBtn" type="button" aria-label="もういちど きく">
+        <span class="ask__icon" aria-hidden="true">🔊</span>
+        <span class="ask__q" id="askFace" aria-hidden="true">？</span>
+      </button>
+      <div class="stars" id="stars" aria-hidden="true"></div>
+    </header>
+    <div class="stage" id="stage"></div>
+  </section>
+
+  <!-- 5問正解のごほうび画面 -->
+  <section class="screen screen--finale" id="finale">
+    <div class="finale__rays" aria-hidden="true"></div>
+    <div class="yatta" id="yatta" aria-label="やったー！"></div>
+    <div class="medal" aria-hidden="true">🏆</div>
+    <div class="parade" id="parade" aria-hidden="true"></div>
+    <button class="replay-btn" id="replayBtn" type="button" aria-label="もういっかい あそぶ">
+      <svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 18a32 32 0 1 0 31 40" fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round"/><path d="M62 6 L86 22 L60 34 Z" fill="currentColor"/></svg>
     </button>
-    <button class="animal animal--cat" type="button" data-pitch="440" aria-label="ねこ">
-      <span class="animal__face" aria-hidden="true">🐱</span>
-    </button>
-  </main>
-  <script src="script.js"></script>
+  </section>
+
+  <canvas class="fx" id="fx" aria-hidden="true"></canvas>
+
+  <script src="js/sound.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/game.js"></script>
 </body>
 </html>
